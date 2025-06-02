@@ -1,0 +1,45 @@
+<!-- templates/connect.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Connect Device</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <iframe src="https://lottie.host/embed/4e693598-72b2-414e-a31f-be1fe6f7bb4a/wWSwS2ZC3Q.lottie"></iframe>
+
+  <!-- Lottie animation -->
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+</head>
+<body class="bg-gray-100 flex flex-col items-center justify-center h-screen text-center">
+  <div>
+    <h2 class="text-2xl font-bold text-gray-700 mb-4">Waiting for Device Connection</h2>
+    <p class="text-sm text-gray-600 mb-8">Please connect your Android device and enable USB debugging.</p>
+
+    <dotlottie-player src="https://lottie.host/4e693598-72b2-414e-a31f-be1fe6f7bb4a/wWSwS2ZC3Q.lottie" background="transparent" speed="1" style="width: 300px; height: 300px" loop autoplay></dotlottie-player>
+    <!-- Loader animation with pulse effect -->
+    <img src="{{ url_for('static', filename='connect-image.jpeg') }}" alt="Connecting" class="w-48 mx-auto mb-4" />
+
+    <div id="status" class="text-gray-700 mt-4">Looking for device...</div>
+  </div>
+
+  <!-- Polling script -->
+  <script>
+  async function checkDevice() {
+    try {
+      const response = await fetch('/check-device');
+      const data = await response.json();
+      if (data.connected) {
+        window.location.href = '/select';
+      }
+    } catch (error) {
+      console.error("Error checking device:", error);
+    }
+  }
+
+  // Poll every 3 seconds
+  setInterval(checkDevice, 3000);
+</script>
+
+</body>
+</html>

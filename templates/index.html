@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Digital Forensics Tool - Web Version</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-900 font-sans">
+  <!-- Top Blue Bar -->
+  <div class="bg-blue-700 p-4 flex justify-between items-center">
+    <h1 class="text-white text-xl font-bold">Digital Forensics Tool</h1>
+    <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-1 px-3 rounded">Buy Now</button>
+  </div>
+
+  <main class="p-10 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+    <!-- Android Data Recovery -->
+    <div onclick="startRecovery('/recover/android')" class="border border-blue-400 rounded-xl p-6 hover:shadow-xl transition cursor-pointer bg-white flex flex-col items-center">
+      <img src="https://img.icons8.com/color/48/android-os.png" alt="Android Icon" class="w-12 h-12" />
+      <h2 class="text-xl font-semibold mt-4 text-blue-900">Android Data Recovery</h2>
+      <p class="text-sm text-gray-700 text-center mt-3 px-2">
+        Recover your lost photos, videos, documents, audio, messages, contacts, call history, and more.
+      </p>
+    </div>
+
+    <!-- WhatsApp Data Extract -->
+    <a href="./connect.html" class="border border-blue-400 rounded-xl p-6 hover:shadow-xl transition cursor-pointer bg-white flex flex-col items-center">
+      <img src="https://img.icons8.com/color/48/whatsapp--v1.png" alt="WhatsApp" />
+      <h2 class="text-xl font-semibold mt-4 text-blue-900">WhatsApp Data Extract</h2>
+      <p class="text-sm text-gray-700 text-center mt-3 px-2">
+        Extract deleted and existing photos, videos, messages, and media files from WhatsApp.
+      </p>
+    </a>
+
+    <!-- WhatsApp Business Data Extract -->
+    <a href="/recover/whatsapp-business" class="border border-blue-400 rounded-xl p-6 hover:shadow-xl transition cursor-pointer bg-white flex flex-col items-center">
+      <img src="{{ url_for('static', filename='icons/whatsapp.png') }}" class="w-12 h-12" alt="WhatsApp Business" />
+      <h2 class="text-xl font-semibold mt-4 text-blue-900">WhatsApp Business Extract</h2>
+      <p class="text-sm text-gray-700 text-center mt-3 px-2">
+        Extract deleted and existing WhatsApp Business photos, videos, and attachments.
+      </p>
+    </a>
+
+    <!-- Facebook Data Extract -->
+    <a href="/recover/facebook" class="border border-blue-400 rounded-xl p-6 hover:shadow-xl transition cursor-pointer bg-white flex flex-col items-center">
+      <img src="https://img.icons8.com/color/48/facebook-new.png" alt="Facebook" />
+      <h2 class="text-xl font-semibold mt-4 text-blue-900">Facebook Data Extract</h2>
+      <p class="text-sm text-gray-700 text-center mt-3 px-2">
+        Extract messages, posts, media, and account information from Facebook.
+      </p>
+    </a>
+
+    <!-- Deleted Data Recovery -->
+    <a href="/connect2" class="border border-blue-400 rounded-xl p-6 hover:shadow-xl transition cursor-pointer bg-white flex flex-col items-center">
+      <img src="https://img.icons8.com/color/48/delete-file.png" alt="Deleted Data Recovery" />
+      <h2 class="text-xl font-semibold mt-4 text-blue-900">Deleted Data Recovery</h2>
+      <p class="text-sm text-gray-700 text-center mt-3 px-2">
+        Restore permanently deleted files, chats, and media from your device.
+      </p>
+    </a>
+  </main>
+
+  <script>
+    function startRecovery(endpoint) {
+      window.location.href = endpoint;
+    }
+  </script>
+</body>
+</html>

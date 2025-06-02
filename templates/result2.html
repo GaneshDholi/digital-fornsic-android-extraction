@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Extraction Results</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen p-8 text-gray-800">
+  <div class="max-w-6xl mx-auto">
+    <h1 class="text-3xl font-bold mb-6 text-center text-blue-700">📦 Extraction Results</h1>
+
+    <!-- Search Box -->
+    <div class="mb-6">
+      <input type="text" id="searchInput" placeholder="🔍 Search results..." class="w-full px-4 py-2 border rounded-xl shadow-sm focus:ring-2 focus:ring-blue-400">
+    </div>
+
+    <!-- ZIP Download Button -->
+    <div class="text-right mb-6">
+      <a href="{{ url_for('download_zip', session_dir=session_dir) }}" class="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-5 rounded-full transition">
+        📥 Download All as ZIP
+      </a>
+    </div>
+
+    <!-- Results Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="resultsList">
+      {% for key, value in results.items() %}
+        <div class="bg-white rounded-2xl shadow-lg p-6 result-card">
+          <h2 class="text-xl font-semibold mb-2 capitalize">{{ key }}</h2>
+
+          {% if value %}
+            <div class="text-green-700 font-medium text-sm">
+              {% if key == 'location' %}
+                {% if value is string and value.endswith(".txt") %}
+                  ✅ Location File Saved
+                  <a href="{{ url_for('static', filename=value.replace('\\', '/').split('/')[-1]) }}" class="text-blue-600 underline">📄 View {{ key }}.txt</a>
+                {% elif value is mapping and value.path is defined %}
+                  ✅ Location File Saved
+                  <p class="text-sm mt-1 text-gray-800">📍 {{ value.summary }}</p>
+                  <a href="{{ url_for('static', filename=value.path.replace('\\', '/').split('/')[-1]) }}" class="text-blue-600 underline">📄 View {{ key }}.txt</a>
+                {% else %}
+                  ✅ {{ value }}
+                {% endif %}
+              {% else %}
+                {% if value is string and value.endswith(".txt") %}
+                  ✅ File Saved
+                  <a href="{{ url_for('static', filename=value.replace('\\', '/').split('/')[-1]) }}" class="text-blue-600 underline">📄 View {{ key }}.txt</a>
+                {% elif value is string %}
+                  ✅ Extracted Successfully
+                  <pre class="whitespace-pre-wrap text-gray-700 bg-gray-100 p-3 rounded mt-2 max-h-64 overflow-y-auto">{{ value }}</pre>
+                {% else %}
+                  ✅ {{ value }}
+                {% endif %}
+              {% endif %}
+            </div>
+          {% else %}
+            <div class="text-yellow-600 font-medium flex items-center">
+              ⚠️ Not Found or Access Denied
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- Back Button -->
+    <div class="text-center mt-10">
+      <a href="/" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full transition">🔙 Back to Home</a>
+    </div>
+  </div>
+
+  <!-- Search Script -->
+  <script>
+    function filterResults() {
+      const input = document.getElementById("searchInput").value.toLowerCase();
+      const cards = document.querySelectorAll(".result-card");
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        card.style.display = text.includes(input) ? "block" : "none";
+      });
+    }
+    document.getElementById("searchInput").addEventListener("keyup", filterResults);
+  </script>
+</body>
+</html>

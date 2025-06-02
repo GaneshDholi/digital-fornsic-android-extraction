@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Select Data Types</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Toggle all checkboxes when "Select All" is clicked
+    function toggleSelectAll(source) {
+      checkboxes = document.getElementsByName('data_type');
+      for (let i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = source.checked;
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-50 p-6 min-h-screen font-sans">
+  <div class="max-w-4xl mx-auto text-center">
+    <h1 class="text-2xl font-bold mb-6">Please select the file type(s) you want to recover.</h1>
+    <form method="POST" class="space-y-6">
+      <div class="flex justify-start items-center gap-2 mb-4">
+        <input type="checkbox" id="selectAll" onclick="toggleSelectAll(this)" class="w-4 h-4 text-blue-600">
+        <label for="selectAll" class="text-gray-700 font-medium">Select all</label>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-sm text-gray-800">
+        <label class="flex flex-col items-center cursor-pointer">
+          <input type="checkbox" name="data_type" value="contacts" class="mb-2">
+          <img src="{{ url_for('static', filename='icons/contacts.png') }}" class="w-12 h-12" alt="Contacts">
+          Contacts
+        </label>
+        <label class="flex flex-col items-center cursor-pointer">
+          <input type="checkbox" name="data_type" value="sms" class="mb-2">
+          <img src="{{ url_for('static', filename='icons/messages.png') }}" class="w-12 h-12" alt="Messages">
+          Messages
+        </label>
+        <label class="flex flex-col items-center cursor-pointer">
+          <input type="checkbox" name="data_type" value="calls" class="mb-2">
+          <img src="{{ url_for('static', filename='icons/call-logs.png') }}" class="w-12 h-12" alt="Call Logs">
+          Call Logs
+        </label>
+        <label class="flex flex-col items-center cursor-pointer">
+          <input type="checkbox" name="data_type" value="dcim" class="mb-2">
+          <img src="{{ url_for('static', filename='icons/photos.png') }}" class="w-12 h-12" alt="Photos">
+          Photos
+        </label>
+        <label class="flex flex-col items-center cursor-pointer">
+          <input type="checkbox" name="data_type" value="video" class="mb-2">
+          <img src="{{ url_for('static', filename='icons/video.png') }}" class="w-12 h-12" alt="Video">
+          Video
+        </label>
+        <label class="flex flex-col items-center cursor-pointer">
+          <input type="checkbox" name="data_type" value="audio" class="mb-2">
+          <img src="{{ url_for('static', filename='icons/audio.png') }}" class="w-12 h-12" alt="Audio">
+          Audio
+        </label>
+        <label class="flex flex-col items-center cursor-pointer">
+          <input type="checkbox" name="data_type" value="documents" class="mb-2">
+          <img src="{{ url_for('static', filename='icons/documents.png') }}" class="w-12 h-12" alt="Documents">
+          Documents
+        </label>
+        <label class="flex flex-col items-center cursor-pointer">
+          <input type="checkbox" name="data_type" value="location" class="mb-2">
+          <img src="{{ url_for('static', filename='icons/location.png') }}" class="w-12 h-12" alt="Location Info">
+          Location Info
+        </label>
+        <label class="flex flex-col items-center cursor-pointer">
+          <input type="checkbox" name="data_type" value="device_info" class="mb-2">
+          <img src="{{ url_for('static', filename='icons/device-info.png') }}" class="w-12 h-12" alt="Device Info">
+          Device Info
+        </label>
+      </div>
+
+      <div class="mt-8">
+        <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">Extract Data</button>
+      </div>
+
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul class="mt-4 text-red-500">
+            {% for msg in messages %}
+              <li>{{ msg }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+    </form>
+  </div>
+</body>
+</html>
