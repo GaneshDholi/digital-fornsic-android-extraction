@@ -86,6 +86,13 @@ Click "Extract" to begin the forensic process.
 
 Download and review results.
 
+Team contribution :-
+Raju Paswan : Team Leader - Guided the entire project, coordinated the team, ensured timely progress, and managed the overall execution of the project.
+Ganesh Dholi: Developer - Worked on backend logic and implemented the Flask-based application for data extraction using ADB.
+Ram Lakhan Meena: Developer - Contributed to the UI development and integration with backend modules, ensuring smooth data flow.
+Tanish Sharma: Tester - Responsible for testing the tool functionality across various devices and reporting bugs or performance issues.
+Unisha Daga: Documentation & Presentation - Created detailed project documentation, compiled reports, and prepared the final presentation for submission.
+
 📸 Screenshots
 Include screenshots like:
 
